@@ -4,6 +4,11 @@ from datetime import date
 import browser_cookie3
 
 cj = browser_cookie3.firefox()
+if not ("advent" in str(cj)):
+    cj = browser_cookie3.chrome()
+    
+
+exit()
 day = date.today().strftime("%d").lstrip("0")
 
 print(f"Initializing day {day}")
