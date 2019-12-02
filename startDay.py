@@ -8,7 +8,6 @@ if not ("advent" in str(cj)):
     cj = browser_cookie3.chrome()
     
 
-exit()
 day = date.today().strftime("%d").lstrip("0")
 
 print(f"Initializing day {day}")
