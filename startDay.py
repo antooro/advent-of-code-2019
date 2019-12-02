@@ -2,16 +2,25 @@ import requests
 import os
 from datetime import date
 import browser_cookie3
+import sys
 
 cj = browser_cookie3.firefox()
 if not ("advent" in str(cj)):
     cj = browser_cookie3.chrome()
     
 
-day = date.today().strftime("%d").lstrip("0")
+day_today = date.today().strftime("%d").lstrip("0")
+
+if len(sys.argv) > 1:
+    day = int(sys.argv[1])
+    if day<0 or day>31 or day>int(day_today):
+        exit("Day is not valid")
+else:
+    day = day_today
+
 
 print(f"Initializing day {day}")
-
+exit()
 if not os.path.exists(f"day{day}"):
     os.mkdir(f"day{day}")
     os.chdir(f"day{day}")
