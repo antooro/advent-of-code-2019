@@ -40,31 +40,18 @@ for l in lineas:
                 dic[i].add((x,y))
                 puntos[i].append((x,y))
 
-
-
     i = i + 1
 
-res = dic[0]
-for i in range(1, len(dic.values())):
-    res = res & dic[i]
+res = dic[0] & dic[1]
 
-minx = 99999999999
-for punto in res:
-    #print(puntos[0].index(punto))
-    #print(puntos[1].index(punto))
-    suma = puntos[0].index(punto) + puntos[1].index(punto)
-    if suma < minx:
-        minx = suma
+#PART 1
+minx = min([abs(punto[0]) + abs(punto[1]) for punto in res])
+
+print(minx) 
+
+#PART 2
+minx = min([puntos[0].index(punto) + puntos[1].index(punto) for punto in res])
+
 print(minx)
     
-'''
-part1
-minx = 9999999
-for punto in res:
-    dis_x = abs(0-punto[0])
-    dis_y = abs(0-punto[1])
-    dist = dis_x+dis_y
-    if dist < minx:
-        minx = dist
-print(minx) 
-'''
+
