@@ -6,7 +6,7 @@ import sys
 
 #Get cookies from the browser
 cj = browser_cookie3.firefox()
-if not ("advent" in str(cj)):
+if not (".adventofcode.com" in str(cj)):
     cj = browser_cookie3.chrome()
     
 #Get today number of day
