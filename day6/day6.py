@@ -24,10 +24,11 @@ for k, v in diccionario.items():
 
 print("PART 1") 
 valores = set()
+
 for k,v in diccionario.items():
     valores.add(k)
-    for val in v:
-        valores.add(val)
+    valores.update(v)
+
 contador = 0
 for value in valores:
     contador +=(nx.shortest_path_length(g,source="COM",target=value))
