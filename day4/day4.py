@@ -1,5 +1,4 @@
 from operator import eq
-from itertools import cycle, islice
 
 contador = 0
 for num in range(123257,647015):
