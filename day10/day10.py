@@ -6,6 +6,9 @@ from time import sleep, perf_counter as pc
 t0 = pc()
 
 
+with open("input10") as f:
+    datos = [list(l.strip().replace(".","0").replace("#","1")) for l in f.readlines()]
+
 def lineFromPoints(P,Q): 
     
     a = Q[1] - P[1] 
@@ -23,14 +26,6 @@ def lineFromPoints(P,Q):
 
     puntos = set()
 
-    '''
-    if(b<0):  
-        print("The line passing through points P and Q is:", 
-              a ,"x ",b ,"y = ",c ,"\n")  
-    else: 
-        print("The line passing through points P and Q is: ", 
-              a ,"x + " ,b ,"y = ",c ,"\n")  
-    '''
     # ax + by = c
     # x = (c-by)/a
     # y = (c-ax)/b
@@ -57,8 +52,6 @@ def lineFromPoints(P,Q):
     puntos.discard(Q)
     return puntos
 
-with open("ex1") as f:
-    datos = [list(l.strip().replace(".","0").replace("#","1")) for l in f.readlines()]
 
 #print(x)
 
@@ -67,15 +60,14 @@ arry = np.array(datos)
 #arry = arry.transpose()
 
 puntos = defaultdict()
-
+coords = []
 for (x,y), value in np.ndenumerate(arry):
     puntos[str(str(x)+","+str(y))] = int(value)
+    if int(value) == 1:
+        coords.append(str(str(x)+","+str(y)))
 
 contador = defaultdict(int)
 
-coords = [i for i,j in puntos.items() if j == 1]
-
-#CAMBIAR INDICE del dict
 for (x,y), value in np.ndenumerate(arry):
     if value == "0":
         continue
@@ -88,11 +80,9 @@ for (x,y), value in np.ndenumerate(arry):
             continue
         
 
-        #print((x,y),(int(z),int(k)))
         lista = lineFromPoints((x,y),(int(z),int(k)))  
         flag = 0
         for l in lista:
-#            print(l == (x,y))
             c_clean = (str(l[0])+","+str(l[1]))
             x_temp = int(c_clean.split(",")[0])
             y_temp = int(c_clean.split(",")[1])
