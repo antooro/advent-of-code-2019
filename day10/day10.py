@@ -136,16 +136,19 @@ for k,v in od.items():
 
 print("\nPART 2")
 c = 0
-while c != 200:    
+while True:
+    indices = []    
     for k,v in od.items():
         if len(v) == 0:
+            indices.append(k)
             continue
         if c == 199:
             print(v[0])
             print(v[0][1] *100 + v[0][0])
             exit()
-
         od[k].remove(v[0])
         c += 1
         
+    for i in indices:
+        del od[i]
 
