@@ -2,9 +2,6 @@ import numpy as np
 from collections import defaultdict
 import itertools
 
-from time import sleep, perf_counter as pc
-t0 = pc()
-
 
 with open("input10") as f:
     datos = [list(l.strip().replace(".","0").replace("#","1")) for l in f.readlines()]
@@ -97,6 +94,58 @@ for (x,y), value in np.ndenumerate(arry):
         
 ind = (max(contador, key=contador.get))
 x,y = ind.split(",")
-print(contador[str(x)+','+str(y)])
+print("PART 1")
 
-print(pc()-t0)
+print(contador[str(x)+','+str(y)])
+X , Y = int(x),int(y)
+print((X,Y))
+
+
+
+
+
+#PART 2
+
+angle_coords = defaultdict(list)
+
+import math
+from collections import OrderedDict
+
+for (x,y), value in np.ndenumerate(arry):
+    if value == "0":
+        continue
+    myradians = math.degrees(math.atan2(X-x, Y-y))
+    degree = (270 + myradians) % 360
+    angle_coords[degree].append((x,y))
+
+
+od = OrderedDict(sorted(angle_coords.items()))
+
+
+for k,v in od.items():
+    if len(v) <= 1:
+            continue
+    tmp = []
+    for val in v:
+        x,y = val
+        tmp.append([val, math.sqrt((X - x)**2 + (Y - y)**2)])
+    
+    tmp = sorted(tmp, key=lambda x: x[0],reverse=True)
+    tmp = [t[0] for t in tmp]
+    od[k] = tmp
+
+print("\nPART 2")
+c = 0
+while c != 200:    
+    for k,v in od.items():
+        if len(v) == 0:
+            continue
+        if c == 199:
+            print(v[0])
+            print(v[0][1] *100 + v[0][0])
+            exit()
+
+        od[k].remove(v[0])
+        c += 1
+        
+
