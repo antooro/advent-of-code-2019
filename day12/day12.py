@@ -1,6 +1,6 @@
 import math
 
-with open("ex1") as f:
+with open("input12") as f:
     datos = f.read().splitlines()
 
 class Moon():
@@ -66,8 +66,8 @@ def lcm(x, y):
         a, b = b % a, a
     return x // b * y
 
-
-while True:
+run  = True
+while run:
     for c in combi:
         moon1 = c[0]
         moon2 = c[1]
@@ -76,22 +76,6 @@ while True:
         list_y = []
         list_z = []
 
-        for moon in lista_lunas:
-            list_x.append((moon.x,moon.x_speed))
-            list_y.append((moon.y,moon.y_speed))
-            list_z.append((moon.z,moon.z_speed))
-
-
-
-        if tuple(list_x) in datosx and tuple(list_y) in datosy and tuple(list_z) in datosz:
-            print(lcm(len(datosx), lcm(len(datosy), len(datosz))))
-            print(list_x,list_y,list_z)
-            print(step)
-            exit()
-        else:
-            datosx.add(tuple(list_x))
-            datosy.add(tuple(list_y))
-            datosz.add(tuple(list_z))
             
 
         if moon1.x > moon2.x:
@@ -115,11 +99,32 @@ while True:
             moon1.update_speed(inc_z = 1)
             moon2.update_speed(inc_z = -1)
     
+    
+        
+
     for moon in lista_lunas:
         moon.update_pos()
+        list_x.append((moon.x,moon.x_speed))
+        list_y.append((moon.y,moon.y_speed))
+        list_z.append((moon.z,moon.z_speed))
+
+
+
+    if tuple(list_x) in datosx and tuple(list_y) in datosy and tuple(list_z) in datosz:
+        print(lcm(len(datosx), lcm(len(datosy), len(datosz))))
+        run = False
+        break
+    else:
+        datosx.add(tuple(list_x))
+        datosy.add(tuple(list_y))
+        datosz.add(tuple(list_z))
     step += 1
 
+
+'''
+pART 1
 total_energy = 0
 for moon in lista_lunas:
     total_energy += moon.getEnergy()
 print(total_energy)
+'''
