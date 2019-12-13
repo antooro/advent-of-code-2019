@@ -28,6 +28,8 @@ class intMachine():
         self.coord = [0,0]
         self.dic = defaultdict(list)
         self.res = 0
+
+ 
     def run(self):
         while True:
             foc = self.readOC()
